@@ -36,8 +36,16 @@ st.write("Visualização dos dados da collection `data_mapping_automation` do ba
 # Consultas no MongoDB
 # =========================
 try:
-    total_docs = collection.count_documents({})
-    st.metric("Total de documentos", total_docs)
+    col1, col2 = st.columns(2)
+
+    with col1:
+        total_docs = collection.count_documents({})
+        st.metric("Total de documentos", total_docs)
+
+    with col2:
+        total_validados = collection.count_documents({"validado": True})
+        st.metric("Total de documentos validados", total_validados)
+
 
     # Botão para carregar os dados (evita sobrecarga)
     if st.button("🔍 Carregar dados da coleção"):
